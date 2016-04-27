@@ -8,15 +8,6 @@ import (
 	"encoding/json"
 )
 
-type Test3 struct {
-   Length      int
-   Name        string
-}
-
-type Test1 struct {
-   length      int
-}
-
 type QueueLength struct {
    Length      int
    Timestamp   time.Time
