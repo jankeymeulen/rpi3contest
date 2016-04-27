@@ -1,0 +1,12 @@
+[Unit]
+Description=RPI Contest Script
+After=multi-user.target
+
+[Service]
+Type=idle
+User=jan
+Environment=GOOGLE_APPLICATION_CREDENTIALS=/home/jan/.config/gcloud/application_default_credentials.json
+ExecStart=/usr/bin/python /home/jan/contest.py
+
+[Install]
+WantedBy=multi-user.target
