@@ -4,9 +4,12 @@ api_version: go1
 handlers:
 - url: /queue
   script: _go_app
+  secure: always
 - url: /
   static_files: index.html
   upload: index.html
+  secure: always
 - url: /dummy
   static_files: dummy.json
   upload: dummy.json
+  secure: always
