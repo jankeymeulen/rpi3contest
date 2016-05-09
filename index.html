@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript">
+	google.charts.load('current', {packages: ['corechart', 'line', 'gauge']});
+
+
+	$.getJSON( "https://cafefritkotqueue.appspot.com/queue", function( data ) {
+	//$.getJSON( "/dummy", function( data ) {
+	var items = [];
+ 		 $.each( data, function( key, val ) {
+    		items.push( [new Date(val.Timestamp),val.Length] );
+  		});
+		drawGauge(data[0].Length);
+		drawLine(items);
+	});
+
+   function drawLine(items) {
+	   var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'X');
+      data.addColumn('number', 'Queue Length');
+      data.addRows(items);
+
+      var options = {
+         hAxis: {
+            title: 'Time'
+         },
+         vAxis: {
+            title: 'Queue Length'
+         },
+	      legend: {
+	         position: 'None'
+	      }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('line_div'));
+      chart.draw(data, options);
+   }
+
+   function drawGauge(length) {
+
+      var data = google.visualization.arrayToDataTable([
+         ['Label', 'Value'],
+         ['Queue Length', length],
+      ]);
+
+      var options = {
+         width: 120, height: 120,
+         redFrom: 15, redTo: 25,
+         yellowFrom:10, yellowTo: 15,
+         minorTicks: 2,
+         max: 25,
+      };
+
+      var chart = new google.visualization.Gauge(document.getElementById('gauge_div'));
+      chart.draw(data, options);
+   }
+
+    </script>
+  </head>
+  <body>
+    <div id="gauge_div" style="width: 120px; height: 120px"></div>
+    <div id="line_div" style="width: 900px; height: 500px"></div>
+  </body>
+</html>
