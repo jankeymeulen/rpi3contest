@@ -1,13 +1,39 @@
 <html>
   <head>
+<style>
+#main_div {
+  width: 100%;
+  height: 100%;
+  border-color: red;
+  border-style: solid;
+  position: relative;
+}
+#gauge_div {
+  float: left;
+  margin: 0 auto;
+  border-color: red;
+  border-style: solid;
+  width: 45%;
+  height: 90%;
+}
+#line_div {
+  float: left;
+  margin: 0 auto;
+  border-color: red;
+  border-style: solid;
+  width: 45%;
+  height: 90%;
+}
+</style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script type="text/javascript">
 	google.charts.load('current', {packages: ['corechart', 'line', 'gauge']});
+   google.charts.setOnLoadCallback(fetchData);
 
-
+   function fetchData()
+   {
 	$.getJSON( "https://cafefritkotqueue.appspot.com/queue", function( data ) {
-	//$.getJSON( "/dummy", function( data ) {
 	var items = [];
  		 $.each( data, function( key, val ) {
     		items.push( [new Date(val.Timestamp),val.Length] );
@@ -15,6 +41,7 @@
 		drawGauge(data[0].Length);
 		drawLine(items);
 	});
+   }
 
    function drawLine(items) {
 	   var data = new google.visualization.DataTable();
@@ -46,9 +73,10 @@
       ]);
 
       var options = {
-         width: 120, height: 120,
+         width: 300,
          redFrom: 15, redTo: 25,
          yellowFrom:10, yellowTo: 15,
+         greenFrom:0, greenTo: 10,
          minorTicks: 2,
          max: 25,
       };
@@ -60,7 +88,9 @@
     </script>
   </head>
   <body>
-    <div id="gauge_div" style="width: 120px; height: 120px"></div>
-    <div id="line_div" style="width: 900px; height: 500px"></div>
+  <div id="main_div">
+    <div id="gauge_div" ></div>
+    <div id="line_div" ></div>
+  </div>
   </body>
 </html>
