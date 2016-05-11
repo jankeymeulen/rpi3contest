@@ -16,6 +16,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 *  0-5   * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 0
 *  6-7   * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 5
 *  8-9 * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 0
-*  10    * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 10
-*  11-23 * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 0
+*  10-11    * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 10
+*  12-23 * * 1-5  jan   /home/jan/rpi3contest/contest_dummyvalue.py 0
 #
